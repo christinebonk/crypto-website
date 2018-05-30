@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crypto</title>
+     <svg></svg>
+    <script src="https://d3js.org/d3.v4.min.js"></script> 
+<body>
+       <h1>Line Chart using D3.js</h1>
+        
+        <svg class="line-chart"></svg>
+<script>
+    
+var apiData = [
+{
+"time_period_start": "2018-05-01T00:00:00.0000000Z",
+"time_period_end": "2018-05-02T00:00:00.0000000Z",
+"time_open": "2018-05-01T00:04:04.0000000Z",
+"time_close": "2018-05-01T23:59:40.0000000Z",
+"price_open": 12050,
+"price_high": 12050,
+"price_low": 11600,
+"price_close": 11973,
+"volume_traded": 444.73058202,
+"trades_count": 1622
+},
+{
+"time_period_start": "2018-05-02T00:00:00.0000000Z",
+"time_period_end": "2018-05-03T00:00:00.0000000Z",
+"time_open": "2018-05-02T00:01:36.0000000Z",
+"time_close": "2018-05-02T23:59:12.0000000Z",
+"price_open": 11973,
+"price_high": 12199,
+"price_low": 11821.02,
+"price_close": 12150,
+"volume_traded": 192.45504096,
+"trades_count": 1205
+},
+{
+"time_period_start": "2018-05-03T00:00:00.0000000Z",
+"time_period_end": "2018-05-04T00:00:00.0000000Z",
+"time_open": "2018-05-03T00:01:35.0000000Z",
+"time_close": "2018-05-03T23:59:26.0000000Z",
+"price_open": 12026.82,
+"price_high": 12499.99,
+"price_low": 11901.53,
+"price_close": 12489.99,
+"volume_traded": 439.18612821,
+"trades_count": 2446
+},
+{
+"time_period_start": "2018-05-04T00:00:00.0000000Z",
+"time_period_end": "2018-05-05T00:00:00.0000000Z",
+"time_open": "2018-05-04T00:00:18.0000000Z",
+"time_close": "2018-05-04T23:59:46.0000000Z",
+"price_open": 12479.99,
+"price_high": 12639,
+"price_low": 12097.53,
+"price_close": 12550,
+"volume_traded": 443.28454079,
+"trades_count": 1930
+},
+{
+"time_period_start": "2018-05-05T00:00:00.0000000Z",
+"time_period_end": "2018-05-06T00:00:00.0000000Z",
+"time_open": "2018-05-05T00:00:57.0000000Z",
+"time_close": "2018-05-05T23:59:52.0000000Z",
+"price_open": 12550,
+"price_high": 12828,
+"price_low": 12401.69,
+"price_close": 12630,
+"volume_traded": 168.44939667,
+"trades_count": 1792
+},
+{
+"time_period_start": "2018-05-06T00:00:00.0000000Z",
+"time_period_end": "2018-05-07T00:00:00.0000000Z",
+"time_open": "2018-05-06T00:00:08.0000000Z",
+"time_close": "2018-05-06T23:57:42.0000000Z",
+"price_open": 12520.01,
+"price_high": 12700,
+"price_low": 12099,
+"price_close": 12388.88,
+"volume_traded": 346.2406563,
+"trades_count": 1461
+},
+{
+"time_period_start": "2018-05-07T00:00:00.0000000Z",
+"time_period_end": "2018-05-08T00:00:00.0000000Z",
+"time_open": "2018-05-07T00:06:21.0000000Z",
+"time_close": "2018-05-07T23:58:51.0000000Z",
+"price_open": 12388.88,
+"price_high": 12400,
+"price_low": 11860.06,
+"price_close": 12118,
+"volume_traded": 167.35727033,
+"trades_count": 1476
+},
+{
+"time_period_start": "2018-05-08T00:00:00.0000000Z",
+"time_period_end": "2018-05-09T00:00:00.0000000Z",
+"time_open": "2018-05-08T00:01:34.0000000Z",
+"time_close": "2018-05-08T23:58:21.0000000Z",
+"price_open": 12100.1,
+"price_high": 12199,
+"price_low": 11800,
+"price_close": 11973.99,
+"volume_traded": 220.44159335,
+"trades_count": 1209
+},
+{
+"time_period_start": "2018-05-09T00:00:00.0000000Z",
+"time_period_end": "2018-05-10T00:00:00.0000000Z",
+"time_open": "2018-05-09T00:04:25.0000000Z",
+"time_close": "2018-05-09T23:52:32.0000000Z",
+"price_open": 11973.99,
+"price_high": 11989,
+"price_low": 11505,
+"price_close": 11898,
+"volume_traded": 167.80181015,
+"trades_count": 1358
+},
+{
+"time_period_start": "2018-05-10T00:00:00.0000000Z",
+"time_period_end": "2018-05-11T00:00:00.0000000Z",
+"time_open": "2018-05-10T00:02:12.0000000Z",
+"time_close": "2018-05-10T23:59:28.0000000Z",
+"price_open": 11875,
+"price_high": 12050,
+"price_low": 11561.01,
+"price_close": 11561.81,
+"volume_traded": 226.61300853,
+"trades_count": 1163
+}
+]
+
+// document.addEventListener("DOMContentLoaded", function(event) {
+// fetch(parsedData)
+//     .then(function(response) { return response.json(); })
+//     .then(function(data) {
+//         var parsedData = parseData(data);
+//         drawChart(parsedData);
+//     })
+//     .catch(function(err) { console.log(err); })
+// });
+
+// //parse api data for graph
+function parseData(data) {
+    var newArr = [];
+    for (i=0;i<apiData.length;i++) {
+        newArr.push ({
+            date: new Date(data[i].time_period_start),
+            value: data[i].price_open
+        })
+    }
+    return newArr;
+};
+
+
+// var parsedData = parseData(apiData);
+// console.log(parsedData);
+
+//API to fetch historical data of Bitcoin Price Index
+//const api = 'https://api.coindesk.com/v1/bpi/historical/close.json?start=2017-12-31&end=2018-04-01';
+
+/**
+ * Loading data from API when DOM Content has been loaded'.
+ */
+// document.addEventListener("DOMContentLoaded", function(event) {
+// fetch(apiData)
+//     .then(function(response) { return response.json(); })
+//     .then(function(data) {
+      
+//     })
+//     .catch(function(err) { console.log(err); })
+// });
+
+
+
+/**
+ * Parse data into key-value pairs
+ * @param {object} data Object containing historical data of BPI
+ */
+function parseData(data) {
+  var newArr = [];
+    for (i=0;i<data.length;i++) {
+        newArr.push ({
+            date: new Date(data[i].time_period_start),
+            value: data[i].price_open
+        })
+    }
+    return newArr;
+ 
+}
+
+  var parsedData = parseData(apiData);
+      drawChart(parsedData);
+   
+// function(data){
+//         var parsedData = parseData(data);
+//         drawChart(parsedData);
+// };
+
+/**
+ * Creates a chart using D3
+ * @param {object} data Object containing historical data of BPI
+ */
+function drawChart(data) {
+var svgWidth = 600, svgHeight = 400;
+var margin = { top: 20, right: 20, bottom: 30, left: 50 };
+var width = svgWidth - margin.left - margin.right;
+var height = svgHeight - margin.top - margin.bottom;
+
+var svg = d3.select('svg')
+    .attr("width", svgWidth)
+    .attr("height", svgHeight);
+    
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var x = d3.scaleTime()
+    .rangeRound([0, width]);
+
+var y = d3.scaleLinear()
+    .rangeRound([height, 0]);
+
+var line = d3.line()
+    .x(function(d) { return x(d.date)})
+    .y(function(d) { return y(d.value)})
+    x.domain(d3.extent(data, function(d) { return d.date }));
+    y.domain(d3.extent(data, function(d) { return d.value }));
+
+g.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x))
+    .select(".domain")
+    .remove();
+
+g.append("g")
+    .call(d3.axisLeft(y))
+    .append("text")
+    .attr("fill", "#000")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("dy", "0.71em")
+    .attr("text-anchor", "end")
+    .text("Price ($)");
+
+g.append("path")
+    .datum(data)
+    .attr("fill", "none")
+    .attr("stroke", "steelblue")
+    .attr("stroke-linejoin", "round")
+    .attr("stroke-linecap", "round")
+    .attr("stroke-width", 1.5)
+    .attr("d", line);
+}
+
+</script>
+</html>

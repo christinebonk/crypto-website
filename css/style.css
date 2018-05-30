@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:300,400,700');
+/*Colors
+Primary: #1F8CCD
+Secondary: #6B9AE3
+Tertiary: #A8C2EA
+Complementry: #302E6D
+Contrast: #FFF
+*/
+
+html{
+    font-size: 62.5%;
+    font-family: 'Ubuntu', sans-serif;
+}
+
 .header {
     height: 98vh;
     background-image: url(../assets/images/header-stock.jpg);
@@ -94,4 +108,8 @@
 .btn-text:active {
 	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 	transform: translateY(0px);
+}
+
+.body__heading{
+    text-align: center;
 }
