@@ -12,6 +12,10 @@ html{
     font-family: 'Ubuntu', sans-serif;
 }
 
+body{
+    margin: 0;
+}
+
 .header {
     height: 98vh;
     background-image: url(../assets/images/header-stock.jpg);
