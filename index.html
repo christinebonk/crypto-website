@@ -6,23 +6,38 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+		<!--Header Begins-->
 		<header class="header">
-				<div class="header__logo-box">
-					<img src="assets/OurLogo.svg" alt="Logo" class="header__logo">
-				</div>
-				<div class="header__text-box">
-					<h1 class="heading-primary">
-						<span class="heading-primary--main">Crypto Advi</span><br>
-						<span class="heading-primary--sub">it's about the journey not the destination</span>
-					</h1>
-					<a href="#" class="btn btn--white btn--animated">Find What's Hot</a>
-				</div>
-			</header>
-			<div class="body">
-				<h1 class="body__heading">Top Crypto Currencies</h1>
+			<div class="header__logo-box">
+				<img src="assets/OurLogo.svg" alt="Logo" class="header__logo">
 			</div>
-<div id="test"></div>
-<div id="test2"></div>
+			<div class="header__text-box">
+				<h1 class="heading-primary">
+					<span class="heading-primary--main">Crypto Advi</span><br>
+					<span class="heading-primary--sub">it's about the journey not the destination</span>
+				</h1>
+				<a href="#" class="btn btn--white btn--animated">Find What's Hot</a>
+			</div>
+		</header>
+		<!--Header Ends-->
+		<!--Top Crypto Begins-->
+		<div class="body">
+			<h1 class="body__heading">Top Crypto Currencies</h1>
+			<div id="sorter">
+				<!--Sorting Selector Form-->
+				<form>
+					<select name="sort">
+					  <option value="growth">Growth Rates</option>
+					  <option value="price">Price</option>
+					  <option value="volatility">Volatility</option>
+					</select>
+					<input type="submit">
+				</form>
+			</div>
+			<!--Coin Container-->
+			<div id="coin-container">
+			</div>
+		</div>
 	<!--Math JS-->
 	<script src="https://unpkg.com/mathjs@4.4.0/dist/math.min.js"></script>
 	<!--JQuery-->
@@ -30,7 +45,7 @@
 	<!--Moment JS-->
 	<script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
 	<!--Our JS-->
-	<script src="js/test.js"></script>
+	<script src="js/script.js"></script>
 
 
 

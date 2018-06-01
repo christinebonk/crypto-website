@@ -1,36 +1,5 @@
-//Builds Coin API request
-function coinApiData(symbol) {
-	var apiKey = "&apikey=0D2C1A9D-23FC-4EA0-904A-A37A2C5514D8";
-	var period = "/history?period_id=1DAY";
-	var startTime = "&time_start=" + moment().subtract(30, 'days').format();
-	var limit = "&limit=" + 30;
-	var queryURL = "https://rest.coinapi.io/v1/ohlcv/" + symbol + period + startTime + limit + apiKey; 
-	var parsedData
-	$.ajax({
-		url: queryURL,
-		method: "GET" 
-	}).then(function(response) {
-		console.log(response);
-		parsedData = parseData(response);
-		console.log(parsedData);
-		calculateVolatility(parsedData);
-		console.log(symbol);
-	}).then(function() {
-
-	});
-};
-function parseData(data) {
-	var arr = [];
-	for (i=0; i<data.length; i++) {
-		arr.push ({
-        date: new Date(data[i].time_period_start),
-        price: data[i].price_close
-   		});
-	}
-	return arr;
-}
-
-var coinObject = [];
+var coinArray = [];
+var sortedArray;
 
 //Builds CryptoCompare API request
 function cryptoCompareData(symbol1, symbol2, exchange) {
@@ -44,21 +13,19 @@ function cryptoCompareData(symbol1, symbol2, exchange) {
 		//parses the data
 		parsedData = parseDataCompare(response.Data);
 		console.log(parsedData);
+		//build object 
+		var obj = {};
+		obj["name"] = symbol1;
+		//calculate growth and price
 		var past = parsedData[0].price;
 		var current = parsedData[30].price;
-		//calculate volatility
-		// calculateVolatility(parsedData);
-		//calculate market cap
-		//calculate growth rate
-		console.log("hello")
 		var growthRates = getPercentageChange(past, current);
-	}).then(function(response) {
-		//build the object
-		var key = symbol1;
-		var symbol1 = {};
-		symbol1[key] = parsedData[0].price;
-		growthRates.push(symbol1);
-		console.log(growthRates)
+		obj["growth"] = growthRates.toFixed(2);
+		obj["price"] = current.toFixed(2);
+		//calculate volatility
+		var volatility = calculateVolatility(parsedData);
+		obj["volatility"] = volatility.toFixed(2);
+		coinArray.push(obj);
 	});
 };
 
@@ -78,20 +45,16 @@ function getPercentageChange(pastNumber, currentNumber){
        return (changeValue / pastNumber) * 100;
    };
 
-
 function calculateVolatility(data) {
 	var arr = []; 
 	for (i=0;i<(data.length-1);i++) {
 		interdayReturn = (data[i+1].price-data[i].price)/data[i].price;
 		arr.push(interdayReturn);
 	};
-	console.log(arr);
-	var stdArr = math.std(arr);
+	var stdArr = math.std(arr)*100;
 	var annualized = Math.sqrt(365)*stdArr;
-	console.log(stdArr);
-	console.log(annualized);
+	return stdArr;
 };
-
 
 function calculateMarketCap(symbol1) {
 	var queryURL = "https://api.coinmarketcap.com/v2/ticker/?convert=CAD&limit=10&structure=array";
@@ -100,16 +63,45 @@ function calculateMarketCap(symbol1) {
 		method: "GET" 
 	}).then(function(response) {
 		var results = response.data;
-		console.log(results);
 		for (var i=0; i<results.length; i++) {
-        if (results[i].symbol === symbol1) {
-            console.log (results[i].quotes.CAD.market_cap);
-        };
-    };
-	})
+	        if (results[i].symbol === symbol1) {
+	        	return cap = results[i].quotes.CAD.market_cap;
+        	};
+    	};
+	});
 };
 
-
+function bubbleSort(arr,parm) {
+ var sorted = false;
+ while (!sorted) {
+   sorted = true;
+   for (var i = 0; i < arr.length-1; i++) {
+     if (arr[i][parm] > arr[i + 1][parm]) {
+       sorted = false;
+       var temp = arr[i];
+       arr[i] = arr[i + 1];
+       arr[i + 1] = temp;
+   }
+   }
+ }
+ return arr;
+}
+   
+function buildContainer(arr) {
+	for(i=0;i<arr.length;i++) {
+		var newCoin = $("<div>")
+		var coinName = $("<h3>");
+		coinName.text(arr[i].name);
+		var coinPrice = $("<p>");
+		coinPrice.text("Price: $" + arr[i].price)
+		var coinVolatility = $("<p>");
+		coinVolatility.text("Volatility: " + arr[i].volatility + "%")
+		var coinGrowth = $("<p>");
+		coinGrowth.text("Growth: " + arr[i].growth + "%")
+		newCoin.append(coinName,coinPrice,coinVolatility,coinGrowth);
+		$("#coin-container").append(newCoin);
+	}
+}
 
 //API calls
 
@@ -117,12 +109,18 @@ function calculateMarketCap(symbol1) {
 // coinApiData("KRAKEN_SPOT_BTC_CAD"); 
 // coinApiData("KRAKEN_SPOT_ETH_CAD"); 
 // coinApiData("KRAKEN_SPOT_XRP_CAD"); 
-// cryptoCompareData("LTC","CAD","QUADRIGACX"); 
-// cryptoCompareData("BCH","CAD","QUADRIGACX"); 
-// cryptoCompareData("BTC","CAD","QUADRIGACX"); 
+cryptoCompareData("LTC","CAD","QUADRIGACX"); 
+cryptoCompareData("BCH","CAD","QUADRIGACX"); 
+cryptoCompareData("BTC","CAD","QUADRIGACX"); 
 // cryptoCompareData("BTC","CAD","COINBASE"); // prices all the same
 // cryptoCompareData("BTC","CAD","LAKEBTC"); 
 // coinApiData("1BTCXE_SPOT_BTC_CAD"); //dates are strange
 cryptoCompareData("ETH","CAD","QUADRIGACX"); 
-
+cryptoCompareData("XRP","CAD","KRAKEN"); 
 // https://api.quadrigacx.com/public/info
+setTimeout(function(){
+	sortedArray = (bubbleSort(coinArray,"volatility")
+
+		)},1000);
+setTimeout(function(){
+	buildContainer(sortedArray)},1000);
