@@ -145,16 +145,16 @@ var apiData = [
 // });
 
 // //parse api data for graph
-function parseData(data) {
-    var newArr = [];
-    for (i=0;i<apiData.length;i++) {
-        newArr.push ({
-            date: new Date(data[i].time_period_start),
-            value: data[i].price_open
-        })
-    }
-    return newArr;
-};
+// function parseData(data) {
+//     var newArr = [];
+//     for (i=0;i<apiData.length;i++) {
+//         newArr.push ({
+//             date: new Date(data[i].time_period_start),
+//             value: data[i].price_open
+//         })
+//     }
+//     return newArr;
+// };
 
 
 // var parsedData = parseData(apiData);

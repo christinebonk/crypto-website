@@ -1,13 +1,14 @@
 .nav{
     width: 100%;
     background-color: #1F8CCD;
-    height: 7rem;
+    height: 8.5rem;
+
 }
 
 .nav__btn{
     text-align: center;
-    padding-top: 1.2rem;
-    padding-bottom: 1.2rem;
+    padding-top: 1.8rem;
+    padding-bottom: 1.8rem;
     width: 10rem;
     background-color: #A8C2EA;
     display: inline;
@@ -15,6 +16,38 @@
     border-radius: 10rem;
     margin-top: 1.9rem;
     margin-right: 2.5rem;
+}
+.logo__image{
+    height: 9.6rem;
+    padding-left: 1rem;
+    padding-top: .2rem;
+}
+
+.graph__heading{
+    text-align: center;
+    font-size: 3.2rem;
+}
+
+.line-chart{
+    margin: 0 auto;
+    display: block;
+}
+
+.article__link{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+    font-size: 1.6rem;
+    margin-left: .5rem;
+    margin-right: .5rem;
+}
+
+.article__image{
+    padding-top: 1rem;
+    width: 30rem;
+    padding-bottom: 1rem;
+
 }
 
 .stats__heading{
@@ -56,4 +89,12 @@
 
 #volatility{
     max-height: 15rem;
+}
+
+.crypto{
+    overflow: hidden;
+    height: 9.6rem;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    margin: 1.5rem;
 }

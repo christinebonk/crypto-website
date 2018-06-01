@@ -8,13 +8,13 @@
 </head>
 <body>
     <div class="nav">
-        <img src="our-logo.jpg" alt="logo" class="logo__image">
+        <img src="assets/OurLogo.svg" alt="logo" class="logo__image">
         <a href="index.html" class="nav__btn">Home</a>
     </div>
 
     <div class="graph">
-        <h1 class="graph__heading">(Most Recent Stats)</h1>
-        <img style="max-width: 600px;" src="assets/images/ScreenShot.png">
+        <h1 class="graph__heading">Bitcoin Stats</h1>
+        <svg class="line-chart"></svg>
     </div>
     <div class="stats">
         <h1 class="stats__heading">Current Statistics</h1>
@@ -22,7 +22,7 @@
             <div class="stats__item">
                 <h2 class="stats__heading">Daily High</h2>
                 <img src="assets/images/icons/value.svg" alt="placeholder">
-                <p class="stat__text"><span id="statHigh"></span>#######</p>
+                <p class="stat__text"><span id="statHigh"></span></p>
             </div>
             <div class="stats__item">
                 <h2 class="stats__heading">Market Cap</h2>
@@ -39,30 +39,16 @@
                 <img id="volatility" src="assets/images/icons/time-passing.svg" alt="placeholder">
                 <p class="stat__text"><span id="statVolatility">#######</span></p>
             </div>
-        </div> 
+        </div>           
     </div>
     <div class="articles">
         <h1 class="article__heading">Related Articles</h1>
         <div class="article__row">
-            <div class="article__item">
-                <h2 class="article__heading">Blah Blah</h2>
-                <img src"#api-injection" alt="article__placeholder">
-                <p class="article__description"><span id="apiData"></span>Wah wah wahhh</p>
-            </div>
-            <div class="article__item">
-                <h2 class="article__heading">Blah Blah</h2>
-                <img src"#api-injection" alt="article__placeholder">
-                <p class="article__description"><span id="apiData"></span>Wah wah wahhh</p>
-            </div>
-            <div class="article__item">
-                <h2 class="article__heading">Blah Blah</h2>
-                <img src"#api-injection" alt="article__placeholder">
-                <p class="article__description"><span id="apiData"></span>Wah wah wahhh</p>
-            </div>
+           
         </div>
     </div>
     <div class="nav">
-            <img src="our-logo.jpg" alt="logo" class="logo__image">
+            <img src="assets/OurLogo.svg" alt="logo" class="logo__image">
             <a href="index.html" class="nav__btn">Home</a>
     </div>
 
@@ -71,6 +57,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!--Moment JS-->
 <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script> 
+
+<script src="js/graph.js"></script>
 <!--Our JS
 <script src="js/script.js"></script>
 -->
