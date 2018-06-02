@@ -142,4 +142,4 @@ $("#sort-submit").on("click", function(event) {
 		buildContainer(newArray);
 	},1000);
 	
-})
+});

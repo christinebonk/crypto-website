@@ -12,17 +12,27 @@ function cryptoCompareData(symbol1, symbol2, exchange) {
         $("#statHigh").text("$ " + dailyHigh + " CAD");
         console.log(dailyHigh);
 		console.log(response.Data);
-		parsedData = parseDataCompare(response.Data);
+        parsedData = parseDataCompare(response.Data);
+        var past = parsedData[0].value;
+		var current = parsedData[30].value;
+        var growthRates = getPercentageChange(past, current)
+        $("#statGrowth").text("% " + math.round(growthRates));
+        calculateMarketCap(symbol1);
+        console.log("data" + parsedData)
+        var volatility = calculateVolatility(parsedData);
        // console.log(parsedData);
         drawChart(parsedData);
-        calculateVolatility(parsedData);
+       // var volit = calculateVolatility(parsedData);
+       // console.log(volit);
 	}).then(function() {
 
 	});
 };
 
-
-
+function getPercentageChange(pastNumber, currentNumber){
+    var changeValue = currentNumber - pastNumber;
+    return (changeValue / pastNumber) * 100;
+};
 
 
 function parseDataCompare(data) {
@@ -122,28 +132,61 @@ function makeArticles(type) {
       link.a
       var cryptfo = $('<div class ="crypto">').html(crypto1 + crypto2 + crypto3);
       cryptoDiv.append(link);
-      
      cryptoDiv.append(cryptImage);
      cryptoDiv.append(cryptfo);
-   
      $(".article__row").append(cryptoDiv);
     
     }
    });
 };
 
+
+function calculateMarketCap(symbol1) {
+	var queryURL = "https://api.coinmarketcap.com/v2/ticker/?convert=CAD&limit=10&structure=array";
+	$.ajax({
+		url: queryURL,
+		method: "GET" 
+	}).then(function(response) {
+		var results = response.data;
+		for (var i=0; i<results.length; i++) {
+	        if (results[i].symbol === symbol1) {
+	        	var cap = results[i].quotes.CAD.market_cap;
+            $("#statCap").text(cap);
+        	};
+    	};
+    });
+    
+};
+
+
+// function calculateVolatility(data) {
+// 	var arr = []; 
+// 	for (i=0;i<(data.length-1);i++) {
+// 		interdayReturn = (data[i+1].price-data[i].price)/data[i].price;
+// 		arr.push(interdayReturn);
+//     };
+//     console.log(toString(arr));
+//     var stdArr = math.std(arr)*100;
+//     console.log(toString(stdArr));
+//     var annualized = Math.sqrt(365)*stdArr;
+//     console.log(toString(annualized));
+//     return stdArr;
+// };
+
 function calculateVolatility(data) {
-	var arr = []; 
+    var arr = []; 
+    console.log("hello" + data);
 	for (i=0;i<(data.length-1);i++) {
-		interdayReturn = (data[i+1].price-data[i].price)/data[i].price;
-		arr.push(interdayReturn);
-	}
-	console.log(arr);
-	var stdArr = math.std(arr);
-	var annualized = Math.sqrt(365)*stdArr;
-	console.log(stdArr);
-	console.log(annualized);
-}
+		interdayReturn = (data[i+1].value-data[i].value)/data[i].value;
+        arr.push(interdayReturn);
+        console.log(interdayReturn);
+	};
+    var stdArr = math.std(arr)*100;
+    console.log(stdArr);
+    var annualized = Math.sqrt(365)*stdArr;
+    console.log(annualized);
+    $("#statVolatility").html("% " + stdArr.toFixed(2));
+};
 
 
 makeArticles("Bitcoin");
