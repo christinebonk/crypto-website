@@ -1,4 +1,5 @@
 var coinArray = [];
+var displayCards=[];		//Array of BitCoinObjects to pass around
 var sortedArray;
 
 //Builds CryptoCompare API request
@@ -25,6 +26,9 @@ function cryptoCompareData(symbol1, symbol2, exchange) {
 		//calculate volatility
 		var volatility = calculateVolatility(parsedData);
 		obj["volatility"] = volatility.toFixed(2);
+		//mc
+		var market = calculateMarketCap(symbol1);
+		console.log(market);
 		coinArray.push(obj);
 	});
 };
@@ -66,6 +70,7 @@ function calculateMarketCap(symbol1) {
 		for (var i=0; i<results.length; i++) {
 	        if (results[i].symbol === symbol1) {
 	        	return cap = results[i].quotes.CAD.market_cap;
+	        	//objectName.updateMarketCap(cap);
         	};
     	};
 	});
@@ -76,7 +81,7 @@ function bubbleSort(arr,parm) {
  while (!sorted) {
    sorted = true;
    for (var i = 0; i < arr.length-1; i++) {
-     if (arr[i][parm] > arr[i + 1][parm]) {
+     if (arr[i][parm] < arr[i + 1][parm]) {
        sorted = false;
        var temp = arr[i];
        arr[i] = arr[i + 1];
@@ -88,9 +93,16 @@ function bubbleSort(arr,parm) {
 }
    
 function buildContainer(arr) {
+	//TODO::In here build the new BitCoinObjects and attach the elements properly
+	$("#coin-container").empty();
 	for(i=0;i<arr.length;i++) {
+		displayCards[i]=new BitCoinObject();
 		var newCoin = $("<div>")
+		var coinName = arr[i].name;
+		console.log(coinName);
+		var newLink = $("<a>").attr("href", coinName.html);
 		var coinName = $("<h3>");
+		newLink.html(coinName);
 		coinName.text(arr[i].name);
 		var coinPrice = $("<p>");
 		coinPrice.text("Price: $" + arr[i].price)
@@ -98,29 +110,33 @@ function buildContainer(arr) {
 		coinVolatility.text("Volatility: " + arr[i].volatility + "%")
 		var coinGrowth = $("<p>");
 		coinGrowth.text("Growth: " + arr[i].growth + "%")
-		newCoin.append(coinName,coinPrice,coinVolatility,coinGrowth);
+		newCoin.append(newLink,coinPrice,coinVolatility,coinGrowth);
+		displayCards[i].element=newCoin;
 		$("#coin-container").append(newCoin);
 	}
 }
 
 //API calls
-
-// calculateMarketCap("LTC");
-// coinApiData("KRAKEN_SPOT_BTC_CAD"); 
-// coinApiData("KRAKEN_SPOT_ETH_CAD"); 
-// coinApiData("KRAKEN_SPOT_XRP_CAD"); 
 cryptoCompareData("LTC","CAD","QUADRIGACX"); 
 cryptoCompareData("BCH","CAD","QUADRIGACX"); 
 cryptoCompareData("BTC","CAD","QUADRIGACX"); 
-// cryptoCompareData("BTC","CAD","COINBASE"); // prices all the same
-// cryptoCompareData("BTC","CAD","LAKEBTC"); 
-// coinApiData("1BTCXE_SPOT_BTC_CAD"); //dates are strange
 cryptoCompareData("ETH","CAD","QUADRIGACX"); 
 cryptoCompareData("XRP","CAD","KRAKEN"); 
-// https://api.quadrigacx.com/public/info
 setTimeout(function(){
-	sortedArray = (bubbleSort(coinArray,"volatility")
+	sortedArray = (bubbleSort(coinArray,"growth")
 
 		)},1000);
 setTimeout(function(){
-	buildContainer(sortedArray)},1000);
+	buildContainer(sortedArray)},2000);
+
+$("#sort-submit").on("click", function(event) {
+	event.preventDefault();
+	var sortValue = $("#sort").val().trim();
+	console.log(sortValue);
+	newArray = bubbleSort(sortedArray, sortValue);
+	console.log(newArray)
+	setTimeout(function() {
+		buildContainer(newArray);
+	},1000);
+	
+})
