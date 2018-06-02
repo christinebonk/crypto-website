@@ -5,6 +5,7 @@
 	<title>Document</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/stats-page.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <div class="nav">
@@ -14,6 +15,10 @@
 
     <div class="graph">
         <h1 class="graph__heading">Bitcoin Stats</h1>
+        <form id="graph__form">
+            <input id="date" type="date" name="date">
+            <input type="submit" id="date__submit">
+        </form>
         <svg class="line-chart"></svg>
     </div>
     <div class="stats">

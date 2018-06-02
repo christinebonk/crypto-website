@@ -148,4 +148,44 @@ function calculateVolatility(data) {
 
 makeArticles("Bitcoin");
 
+$("#date__submit").on("click", function(event) {
+  event.preventDefault();
+  var userDate = $("#date").val();
+  var a = moment(userDate)
+  console.log(userDate);
+  var b = moment().format();
+  console.log(b);
+  var diff = a.diff(b, 'days');
+  var c = Math.abs(diff);
+  console.log(c);
+  newGraph("BTC","CAD","QUADRIGACX",c);
+  // function cryptoCompareData(symbol1, symbol2, exchange);
+});
+
+
+
+function newGraph(symbol1, symbol2, exchange, range) {
+  var limit = "&limit=" + range;
+  var queryURL = "https://min-api.cryptocompare.com/data/histoday?" + "fsym=" + symbol1 + "&tsym=" + symbol2 + limit + "&e=" + exchange + "&tryConversion=false"; 
+  var parsedData
+  console.log(queryURL);
+  //console.log(queryURL);
+  $.ajax({
+    url: queryURL,
+    method: "GET" 
+  }).then(function(response) {
+        // dailyHigh = response.Data['30'].high;
+        // $("#statHigh").text("$ " + dailyHigh + " CAD");
+        console.log(dailyHigh);
+    console.log(response.Data);
+    parsedData = parseDataCompare(response.Data);
+       // console.log(parsedData);
+        $(".line-chart").empty(" ");
+        drawChart(parsedData);
+        calculateVolatility(parsedData);
+  }).then(function() {
+
+  });
+};
+
 
