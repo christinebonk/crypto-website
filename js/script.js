@@ -22,11 +22,11 @@ function cryptoCompareData(symbol1, symbol2, exchange) {
 		var past = parsedData[0].price;
 		var current = parsedData[30].price;
 		var growthRates = getPercentageChange(past, current);
-		obj["growth"] = growthRates.toFixed(2);
-		obj["price"] = current.toFixed(2);
+		obj["growth"] = parseFloat(growthRates.toFixed(2));
+		obj["price"] = parseFloat(current.toFixed(2));
 		//calculate volatility
 		var volatility = calculateVolatility(parsedData);
-		obj["volatility"] = volatility.toFixed(2);
+		obj["volatility"] = parseFloat(volatility.toFixed(2));
 		//mc
 		calculateMarketCap(obj, symbol1);
 		coinArray.push(obj);
@@ -125,6 +125,7 @@ cryptoCompareData("BCH","CAD","QUADRIGACX");
 cryptoCompareData("BTC","CAD","QUADRIGACX"); 
 cryptoCompareData("ETH","CAD","QUADRIGACX"); 
 cryptoCompareData("XRP","CAD","KRAKEN"); 
+
 setTimeout(function(){
 	sortedArray = (bubbleSort(coinArray,"growth")
 
