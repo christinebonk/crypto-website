@@ -1,6 +1,7 @@
 var coinArray = [];
-var displayCards=[];		//Array of BitCoinObjects to pass around
+// var displayCards = [];		//Array of BitCoinObjects to pass around
 var sortedArray;
+
 
 //Builds CryptoCompare API request
 function cryptoCompareData(symbol1, symbol2, exchange) {
@@ -27,8 +28,7 @@ function cryptoCompareData(symbol1, symbol2, exchange) {
 		var volatility = calculateVolatility(parsedData);
 		obj["volatility"] = volatility.toFixed(2);
 		//mc
-		var market = calculateMarketCap(symbol1);
-		console.log(market);
+		calculateMarketCap(obj, symbol1);
 		coinArray.push(obj);
 	});
 };
@@ -60,7 +60,7 @@ function calculateVolatility(data) {
 	return stdArr;
 };
 
-function calculateMarketCap(symbol1) {
+function calculateMarketCap(obj, symbol1) {
 	var queryURL = "https://api.coinmarketcap.com/v2/ticker/?convert=CAD&limit=10&structure=array";
 	$.ajax({
 		url: queryURL,
@@ -69,8 +69,9 @@ function calculateMarketCap(symbol1) {
 		var results = response.data;
 		for (var i=0; i<results.length; i++) {
 	        if (results[i].symbol === symbol1) {
-	        	return cap = results[i].quotes.CAD.market_cap;
-	        	//objectName.updateMarketCap(cap);
+	        	var cap = results[i].quotes.CAD.market_cap;
+	        	obj["market"] = cap;
+	        	console.log(obj);
         	};
     	};
 	});
@@ -96,8 +97,8 @@ function buildContainer(arr) {
 	//TODO::In here build the new BitCoinObjects and attach the elements properly
 	$("#coin-container").empty();
 	for(i=0;i<arr.length;i++) {
-		displayCards[i]=new BitCoinObject();
-		var newCoin = $("<div>")
+		// displayCards[i]=new BitCoinObject();
+		var newCoin = $("<div class='coin'>")
 		var coinName = arr[i].name;
 		console.log(coinName);
 		var newLink = $("<a>").attr("href", coinName.html);
@@ -110,8 +111,10 @@ function buildContainer(arr) {
 		coinVolatility.text("Volatility: " + arr[i].volatility + "%")
 		var coinGrowth = $("<p>");
 		coinGrowth.text("Growth: " + arr[i].growth + "%")
-		newCoin.append(newLink,coinPrice,coinVolatility,coinGrowth);
-		displayCards[i].element=newCoin;
+		var coinMarket = $("<p>");
+		coinMarket.text("Market: $" + arr[i].market)
+		newCoin.append(newLink,coinPrice,coinVolatility,coinGrowth,coinMarket);
+		// displayCards[i].element=newCoin;
 		$("#coin-container").append(newCoin);
 	}
 }
