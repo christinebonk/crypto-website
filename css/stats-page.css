@@ -98,3 +98,7 @@
     line-height: 1.2;
     margin: 1.5rem;
 }
+
+#error-messaging {
+    color: red;
+}
