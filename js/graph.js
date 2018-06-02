@@ -175,7 +175,6 @@ function calculateMarketCap(symbol1) {
 
 function calculateVolatility(data) {
     var arr = []; 
-    console.log("hello" + data);
 	for (i=0;i<(data.length-1);i++) {
 		interdayReturn = (data[i+1].value-data[i].value)/data[i].value;
         arr.push(interdayReturn);
@@ -192,16 +191,23 @@ function calculateVolatility(data) {
 makeArticles("Bitcoin");
 
 $("#date__submit").on("click", function(event) {
-  event.preventDefault();
+  event.preventDefault();   
+
   var userDate = $("#date").val();
   var a = moment(userDate)
-  console.log(userDate);
   var b = moment().format();
-  console.log(b);
-  var diff = a.diff(b, 'days');
-  var c = Math.abs(diff);
-  console.log(c);
-  newGraph("BTC","CAD","QUADRIGACX",c);
+  if (userDate > b) {
+    $("#error-messaging").text("Please enter a past date");
+  } else {
+    $("#error-messaging").text("");
+    console.log(b);
+    var diff = a.diff(b, 'days');
+    var c = Math.abs(diff);
+    console.log(c);
+    newGraph("BTC","CAD","QUADRIGACX",c);
+  }
+  
+  
   // function cryptoCompareData(symbol1, symbol2, exchange);
 });
 
@@ -217,11 +223,18 @@ function newGraph(symbol1, symbol2, exchange, range) {
     url: queryURL,
     method: "GET" 
   }).then(function(response) {
-        // dailyHigh = response.Data['30'].high;
-        // $("#statHigh").text("$ " + dailyHigh + " CAD");
-        console.log(dailyHigh);
+      parsedData = parseDataCompare(response.Data);     
+    var past = parsedData[0].value;
+    var current = parsedData[30].value;
+    var growthRates = getPercentageChange(past, current)
+    $("#statGrowth").text("% " + math.round(growthRates));
+    calculateMarketCap(symbol1);
+    console.log("data" + parsedData)
+    var volatility = calculateVolatility(parsedData);
+    
+    console.log(dailyHigh);
     console.log(response.Data);
-    parsedData = parseDataCompare(response.Data);
+  
        // console.log(parsedData);
         $(".line-chart").empty(" ");
         drawChart(parsedData);
