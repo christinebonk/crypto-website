@@ -15,7 +15,7 @@
     </div>
 
     <div class="graph">
-        <h1 class="graph__heading">Litecoin Stats <span id="limitDays">(90 Days)</span></h1>
+        <h1 class="graph__heading">Litecoin Stats </h1>
         <form id="graph__form">
             <h2>Select your period start date</h2>
             <input id="date" type="date" name="date">
@@ -25,7 +25,7 @@
         <svg class="line-chart"></svg>
     </div>
     <div class="stats">
-        <h1 class="stats__heading">Current Statistics</h1>
+        <h1 class="stats__heading">Current Statistics<span id="limitDays">(90 Days)</span></h1>
         <div class="stats__row">
             <div class="stats__item">
                 <h2 class="stats__heading">Daily High</h2>
@@ -72,8 +72,6 @@
     makeArticles("Litecoin");
     cryptoCompareData("LTC","CAD","QUADRIGACX");
 </script>
-<!--Our JS
-<script src="js/script.js"></script>
--->
+
 </body>
 </html>

@@ -59,7 +59,14 @@
     width: 30rem;
     background-color: #A8C2EA;
     border-radius: 2.5rem;
+    margin-top: 3.2rem;
     border: .3rem solid #6B9AE3;
+}
+.stat__text{
+    font-size: 1.8rem;
+}
+.stats__heading{
+    font-size: 2.4rem;
 }
 
 #volatility{
@@ -76,4 +83,19 @@
 
 #error-messaging {
     color: red;
+}
+
+@media screen and (max-width: 700px){
+    .graph{
+        display: none;
+    }
+    
+}
+
+@media screen and (max-width: 500px){
+    .stats__item{
+        margin-left: 4rem;
+        margin-right: 4rem;
+        width: 110px;
+    }
 }
