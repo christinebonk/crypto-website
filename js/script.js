@@ -102,7 +102,7 @@ function buildContainer(arr) {
 		var coinName = arr[i].name;
 		console.log(coinName);
 			if(coinName == "BTC"){
-				newLink = $("<a>").attr("href", "example-graph.html");
+				newLink = $("<a>").attr("href", "btc.html");
 				coinLogo = $("<img>").attr("alt", "coinLogo").attr("src", "assets/images/coinLogos/bitcoin.png").attr("class", "coinLogos");
 				newCoin.append(coinLogo);
 			}else if(coinName == "ETH"){

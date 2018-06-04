@@ -196,3 +196,11 @@ a{
 .coinLogos{
 	height: 112px;
 }
+
+#graph__form{
+	display: flex;
+    flex-direction: column;
+    width: 21rem;
+    align-items: flex-end;
+    margin-left: 4rem;
+}
