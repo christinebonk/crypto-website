@@ -101,37 +101,17 @@ function buildContainer(arr) {
 		var newCoin = $("<div class='coin'>")
 		var coinName = arr[i].name;
 		console.log(coinName);
-			if(coinName == "BTC"){
-				newLink = $("<a>").attr("href", "btc.html");
-				coinLogo = $("<img>").attr("alt", "coinLogo").attr("src", "assets/images/coinLogos/bitcoin.png").attr("class", "coinLogos");
-				newCoin.append(coinLogo);
-			}else if(coinName == "ETH"){
-				newLink = $("<a>").attr("href", "eth.html");
-				coinLogo = $("<img>").attr("alt", "coinLogo").attr("src", "assets/images/coinLogos/ethereum.png").attr("class", "coinLogos");
-				newCoin.append(coinLogo);
-			}else if(coinName == "LTC"){
-				newLink = $("<a>").attr("href", "ltc.html");
-				coinLogo = $("<img>").attr("alt", "coinLogo").attr("src", "assets/images/coinLogos/litecoin.png").attr("class", "coinLogos");
-				newCoin.append(coinLogo);
-			}else if(coinName == "XRP"){
-				newLink = $("<a>").attr("href", "xrp.html");
-				coinLogo = $("<img>").attr("alt", "coinLogo").attr("src", "assets/images/coinLogos/ripple.png").attr("class", "coinLogos");
-				newCoin.append(coinLogo);
-			}else if(coinName == "BCH"){
-				newLink = $("<a>").attr("href", "bch.html");
-				coinLogo = $("<img>").attr("alt", "coinLogo").attr("src", "assets/images/coinLogos/bitcoinCash.png").attr("class", "coinLogos");
-				newCoin.append(coinLogo);
-			}
-		var coinName = $("<h3 class='coin-title'>");
+		var newLink = $("<a>").attr("href", coinName.html);
+		var coinName = $("<h3>");
 		newLink.html(coinName);
 		coinName.text(arr[i].name);
-		var coinPrice = $("<p class='stat-text'>");
+		var coinPrice = $("<p>");
 		coinPrice.text("Price: $" + arr[i].price)
-		var coinVolatility = $("<p class='stat-text'>");
+		var coinVolatility = $("<p>");
 		coinVolatility.text("Volatility: " + arr[i].volatility + "%")
-		var coinGrowth = $("<p class='stat-text'>");
+		var coinGrowth = $("<p>");
 		coinGrowth.text("Growth: " + arr[i].growth + "%")
-		var coinMarket = $("<p class='stat-text'>");
+		var coinMarket = $("<p>");
 		coinMarket.text("Market: $" + arr[i].market)
 		newCoin.append(newLink,coinPrice,coinVolatility,coinGrowth,coinMarket);
 		// displayCards[i].element=newCoin;
@@ -162,5 +142,4 @@ $("#sort-submit").on("click", function(event) {
 	setTimeout(function() {
 		buildContainer(newArray);
 	},1000);
-	
 });
