@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+    <title>Bitcoin Cash Stats</title>
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/stats-page.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +15,7 @@
     </div>
 
     <div class="graph">
-        <h1 class="graph__heading">Bitcoin Stats</h1>
+        <h1 class="graph__heading">Bitcoin Cash Stats <span id="limitDays">(90 Days)</span></h1>
         <form id="graph__form">
             <h2>Select your period start date</h2>
             <input id="date" type="date" name="date">
@@ -67,8 +68,10 @@
 <script src="https://d3js.org/d3.v4.min.js"></script> 
 
 <script src="js/graph.js"></script>
-<!--Our JS
-<script src="js/script.js"></script>
--->
+<script>
+    makeArticles("Bitcoin Cash");
+    cryptoCompareData("BCH","CAD","QUADRIGACX");
+</script>
+
 </body>
 </html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <title>Ethereum Stats</title>
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/stats-page.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="nav">
+        <a class="logo__link" href="index.html"><img src="assets/OurLogo.svg" alt="logo" class="logo__image"></a>
+        <a href="index.html" class="nav__btn">Home</a>
+    </div>
+
+    <div class="graph">
+        <h1 class="graph__heading">Ethereum Stats</h1>
+        <form id="graph__form">
+            <h2>Select your period start date</h2>
+            <input id="date" type="date" name="date">
+            <input type="submit" id="date__submit">
+            <p id="error-messaging"></p>
+        </form>
+        <svg class="line-chart"></svg>
+    </div>
+    <div class="stats">
+        <h1 class="stats__heading">Current Statistics <span id="limitDays">(90 Days)</span></h1>
+        <div class="stats__row">
+            <div class="stats__item">
+                <h2 class="stats__heading">Daily High</h2>
+                <img src="assets/images/icons/value.svg" alt="placeholder">
+                <p class="stat__text"><span id="statHigh"></span></p>
+            </div>
+            <div class="stats__item">
+                <h2 class="stats__heading">Market Cap</h2>
+                <img src="assets/images/icons/pie-chart.svg" alt="placeholder">
+                <p class="stat__text"><span id="statCap"></span></p>
+            </div>
+            <div class="stats__item">
+                <h2 class="stats__heading">Growth Rate</h2>
+                <img src="assets/images/icons/bar-chart.svg" alt="placeholder">
+                <p class="stat__text"><span id="statGrowth"></span></p>
+            </div>
+            <div class="stats__item">
+                <h2 class="stats__heading">Volatility</h2>
+                <img id="volatility" src="assets/images/icons/time-passing.svg" alt="placeholder">
+                <p class="stat__text"><span id="statVolatility"></span></p>
+            </div>
+        </div>           
+    </div>
+    <div class="articles">
+        <h1 class="article__heading">Related Articles</h1>
+        <div class="article__row">
+           
+        </div>
+    </div>
+    <div class="nav">
+             <a class="logo__link" href="index.html"><img src="assets/OurLogo.svg" alt="logo" class="logo__image"></a>
+            <a href="index.html" class="nav__btn">Home</a>
+    </div>
+
+<script src="https://unpkg.com/mathjs@4.4.0/dist/math.min.js"></script>
+<!--JQuery-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!--Moment JS-->
+<script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script> 
+
+<script src="js/graph.js"></script>
+<script>
+    makeArticles("Ethereum");
+    cryptoCompareData("ETH","CAD","QUADRIGACX");
+</script>
+
+</body>
+</html>

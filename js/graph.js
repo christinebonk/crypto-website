@@ -1,6 +1,6 @@
 
 function cryptoCompareData(symbol1, symbol2, exchange) {
-	var limit = "&limit=" + 30;
+	var limit = "&limit=" + 90;
 	var queryURL = "https://min-api.cryptocompare.com/data/histoday?" + "fsym=" + symbol1 + "&tsym=" + symbol2 + limit + "&e=" + exchange + "&tryConversion=false"; 
 	var parsedData
 	//console.log(queryURL);
@@ -98,8 +98,6 @@ function drawChart(data) {
         .attr("stroke-width", 1.5)
         .attr("d", line);
 }
-
-cryptoCompareData("BTC","CAD","QUADRIGACX");
 //var parsedData = parseData(a);
 
 
@@ -188,8 +186,6 @@ function calculateVolatility(data) {
 };
 
 
-makeArticles("Bitcoin");
-
 $("#date__submit").on("click", function(event) {
   event.preventDefault();   
 
@@ -223,6 +219,8 @@ function newGraph(symbol1, symbol2, exchange, range) {
     url: queryURL,
     method: "GET" 
   }).then(function(response) {
+    $("#limitDays").text('');
+    $("#limitDays").text("(" + range + " Days)");
       parsedData = parseDataCompare(response.Data);     
     var past = parsedData[0].value;
     var current = parsedData[30].value;

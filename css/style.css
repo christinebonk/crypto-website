@@ -16,6 +16,11 @@ body{
     margin: 0;
 }
 
+a{
+	text-decoration: none;
+    color: black;
+}
+
 .header {
     height: 98vh;
     background-image: url(../assets/images/header-stock.jpg);
@@ -26,12 +31,12 @@ body{
 
 .header__logo-box {
     position: absolute;
-    top: 4rem;
-    left: 4rem;
 }
 
 .header__logo {
-    height: 15rem;
+	height: 7.6rem;
+    padding-left: 1rem;
+    padding-top: 1.2rem;
 }
 .header__text-box {
     position: absolute;
@@ -40,6 +45,19 @@ body{
     transform: translate(-50%, -50%);
     text-align: center;
     color: white;
+}
+
+.heading-primary{
+	-webkit-text-stroke: black;
+    -webkit-text-stroke-width: 1.4px;
+}
+
+.heading-primary--main{
+	letter-spacing: 11.2px;
+    font-size: 8rem;
+}
+.heading-primary--sub{
+	font-size: 2.6rem;
 }
 
 
@@ -51,7 +69,7 @@ body{
 	border-radius: 100px;
 	transition: all .2s;
 	position: relative;
-	font-size: 24px;
+	font-size: 2.4rem;
 	color: black;
 }
 
@@ -114,6 +132,118 @@ body{
 	transform: translateY(0px);
 }
 
-.body__heading{
+.nav{
+    width: 100%;
+    background-color: #1F8CCD;
+    height: 10rem;
+
+}
+
+.nav__secondaryPages{
+	float: right;
+	margin-top: 3px;
+}
+
+.nav__btn{
     text-align: center;
+    padding-top: 1.8rem;
+    padding-bottom: 1.8rem;
+    width: 10rem;
+    background-color: #A8C2EA;
+    display: inline;
+    float: right;
+    border-radius: 10rem;
+    margin-top: 2.5rem;
+    margin-right: 2.5rem;
+}
+
+.nav__btn:hover{
+	transform: scale(1.03);
+	-webkit-box-shadow: 0px 0px 24px -2px rgba(0,0,0,0.65);
+	-moz-box-shadow: 0px 0px 24px -2px rgba(0,0,0,0.65);
+	box-shadow: 0px 0px 24px -2px rgba(0,0,0,0.65);
+	background-color: #D5E3F9;
+	transition: .4s ease-in-out all;
+}
+
+.logo__image{
+	height: 7.6rem;
+    padding-left: 1rem;
+    padding-top: 1.2rem;
+}
+
+.body__heading{
+	text-align: center;
+	font-size: 4.8rem;
+}
+
+#coin-container{
+	display: flex;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+	margin-bottom: 9rem;
+}
+
+.coin{
+	display: flex;
+    flex-direction: column;
+	align-items: center;
+	font-size: 1.4rem;
+	width: 270px	;
+	margin-top: 5rem;
+	background-color: #A8C2EA;
+    border-radius: 64px;
+    padding-top: 2.4rem;
+    padding-bottom: 1.2rem;
+    color: black;
+	border: .3rem solid #6B9AE3;
+	margin-left: 2.4rem;
+	margin-right: 2.4rem;
+	transition: .4s ease all; 
+}
+
+.coin:hover{
+	transform: scale(1.05);
+	-webkit-box-shadow: 0px 0px 24px -2px rgba(0,0,0,0.65);
+	-moz-box-shadow: 0px 0px 24px -2px rgba(0,0,0,0.65);
+	box-shadow: 0px 0px 24px -2px rgba(0,0,0,0.65);
+	background-color: #D5E3F9;
+	border: .3rem solid #A8C2EA;
+}
+
+.coin-title{
+	font-size: 3.2rem;
+    margin: 0;
+}
+
+.coinLogos{
+	height: 112px;
+}
+
+#graph__form{
+	display: flex;
+    flex-direction: column;
+    width: 21rem;
+    align-items: flex-end;
+    margin-left: 4rem;
+}
+
+@media screen and (max-width: 748px){
+	html{
+		font-size: 42%;
+	}
+	.footer__nav{
+		height: 32rem;
+	}
+
+	.nav__secondaryPages{
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center
+	}
+
+	.heading-primary{
+		margin-top: 15rem;
+	}
 }

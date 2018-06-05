@@ -1,28 +1,3 @@
-.nav{
-    width: 100%;
-    background-color: #1F8CCD;
-    height: 8.5rem;
-
-}
-
-.nav__btn{
-    text-align: center;
-    padding-top: 1.8rem;
-    padding-bottom: 1.8rem;
-    width: 10rem;
-    background-color: #A8C2EA;
-    display: inline;
-    float: right;
-    border-radius: 10rem;
-    margin-top: 1.9rem;
-    margin-right: 2.5rem;
-}
-.logo__image{
-    height: 9.6rem;
-    padding-left: 1rem;
-    padding-top: .2rem;
-}
-
 .graph__heading{
     text-align: center;
     font-size: 3.2rem;
@@ -84,7 +59,14 @@
     width: 30rem;
     background-color: #A8C2EA;
     border-radius: 2.5rem;
+    margin-top: 3.2rem;
     border: .3rem solid #6B9AE3;
+}
+.stat__text{
+    font-size: 1.8rem;
+}
+.stats__heading{
+    font-size: 2.4rem;
 }
 
 #volatility{
@@ -112,3 +94,19 @@ form {
     justify-content: center;
     flex-direction: column;
 }
+
+/*Media Queries*/
+
+@media screen and (max-width: 700px){
+    .graph{
+        display: none;
+    }
+    
+}
+
+@media screen and (max-width: 500px){
+    .stats__item{
+        margin-left: 4rem;
+        margin-right: 4rem;
+        width: 110px;
+    }

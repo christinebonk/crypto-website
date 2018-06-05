@@ -142,5 +142,4 @@ $("#sort-submit").on("click", function(event) {
 	setTimeout(function() {
 		buildContainer(newArray);
 	},1000);
-	
 });
