@@ -16,10 +16,12 @@ body{
     margin: 0;
 }
 
-a{
+a {
 	text-decoration: none;
     color: black;
 }
+
+/*Header */ 
 
 .header {
     height: 98vh;
@@ -60,6 +62,7 @@ a{
 	font-size: 2.6rem;
 }
 
+/*Ryan's Cool Button Styles*/
 
 .btn:link, .btn:visited {
 	text-transform: uppercase;
@@ -177,6 +180,8 @@ a{
 	font-size: 4.8rem;
 }
 
+/*Main Styles*/
+
 #coin-container{
 	display: flex;
 	justify-content: space-evenly;
@@ -227,6 +232,8 @@ a{
     align-items: flex-end;
     margin-left: 4rem;
 }
+
+/*Media Queries*/
 
 @media screen and (max-width: 748px){
 	html{
