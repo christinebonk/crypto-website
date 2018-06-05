@@ -19,8 +19,10 @@
         <h1 class="graph__heading">Ripple Stats </h1>
         <form id="graph__form">
             <h2>Select your period start date</h2>
-            <input id="date" type="date" name="date">
-            <input type="submit" id="date__submit">
+            <div id="date__input">
+                <input id="date" type="date" name="date">
+                <input type="submit" id="date__submit">
+            </div>
             <p id="error-messaging"></p>
         </form>
         <svg class="line-chart"></svg>

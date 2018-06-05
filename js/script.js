@@ -1,7 +1,6 @@
+//Global Variables
 var coinArray = [];
-// var displayCards = [];		//Array of BitCoinObjects to pass around
 var sortedArray;
-
 
 //Builds CryptoCompare API request
 function cryptoCompareData(symbol1, symbol2, exchange) {
@@ -94,10 +93,8 @@ function bubbleSort(arr,parm) {
 }
    
 function buildContainer(arr) {
-	//TODO::In here build the new BitCoinObjects and attach the elements properly
 	$("#coin-container").empty();
 	for(i=0;i<arr.length;i++) {
-		// displayCards[i]=new BitCoinObject();
 		var newCoin = $("<div class='coin'>")
 		var coinName = arr[i].name;
 		console.log(coinName);
@@ -123,7 +120,7 @@ function buildContainer(arr) {
 				newCoin.append(coinLogo);
 			}
 		var coinName = $("<h3 class='coin-title'>");
-		newLink.html(coinName);
+		newLink.html(newCoin);
 		coinName.text(arr[i].name);
 		var coinPrice = $("<p class='stat-text'>");
 		coinPrice.text("Price: $" + arr[i].price)
@@ -133,9 +130,8 @@ function buildContainer(arr) {
 		coinGrowth.text("Growth: " + arr[i].growth + "%")
 		var coinMarket = $("<p class='stat-text'>");
 		coinMarket.text("Market: $" + arr[i].market)
-		newCoin.append(newLink,coinPrice,coinVolatility,coinGrowth,coinMarket);
-		// displayCards[i].element=newCoin;
-		$("#coin-container").append(newCoin);
+		newCoin.append(coinName,coinPrice,coinVolatility,coinGrowth,coinMarket);
+		$("#coin-container").append(newLink);
 	}
 }
 
@@ -146,6 +142,7 @@ cryptoCompareData("BTC","CAD","QUADRIGACX");
 cryptoCompareData("ETH","CAD","QUADRIGACX"); 
 cryptoCompareData("XRP","CAD","KRAKEN"); 
 
+//Call sort functions
 setTimeout(function(){
 	sortedArray = (bubbleSort(coinArray,"growth")
 
