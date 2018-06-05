@@ -16,6 +16,11 @@
     font-size: 1.6rem;
     margin-left: .5rem;
     margin-right: .5rem;
+    transition: color 0.3s;
+}
+
+.article__link:hover {
+    color: white;
 }
 
 .article__image{
@@ -25,8 +30,26 @@
 
 }
 
+.stats {
+    background: #D5E3F9;
+    padding: 40px 0px 50px;
+    margin: 50px 0px 50px;
+}
+
 .stats__heading{
     text-align: center;
+}
+
+.stats img {
+    max-width: 100px;
+}
+
+h1.stats__heading  {
+    margin: 10px 0px 30px;
+}
+
+h2.stats__heading  {
+    font-size: 2rem;
 }
 
 .stats__row{
@@ -87,14 +110,38 @@
 
 /*Form*/
 
-form {
-    background: #A8C2EA;
-    padding: 20px;
+
+#graph__form {
     display: flex;
+    width: 100%;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
+    margin: 0;
+    padding-bottom: 20px;
 }
 
+input#date {
+    background-color: #1F8CCD;
+    color: white;
+    font-size: 2rem;
+    margin: 0px 15px;
+    border: none;
+}
+
+#date__submit {
+    border-radius: 15px;
+    background: #A8C2EA;
+    padding: 10px;
+    border: .2rem solid #6B9AE3;
+    transition: .4s ease all; 
+}
+
+#date__submit:hover {
+    transform: scale(1.05);
+    background-color: #D5E3F9;
+    cursor: pointer;
+}
 /*Media Queries*/
 
 @media screen and (max-width: 700px){
@@ -110,3 +157,4 @@ form {
         margin-right: 4rem;
         width: 110px;
     }
+

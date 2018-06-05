@@ -3,27 +3,20 @@ function cryptoCompareData(symbol1, symbol2, exchange) {
 	var limit = "&limit=" + 90;
 	var queryURL = "https://min-api.cryptocompare.com/data/histoday?" + "fsym=" + symbol1 + "&tsym=" + symbol2 + limit + "&e=" + exchange + "&tryConversion=false"; 
 	var parsedData
-	//console.log(queryURL);
 	$.ajax({
 		url: queryURL,
 		method: "GET" 
 	}).then(function(response) {
-        dailyHigh = response.Data['30'].high;
-        $("#statHigh").text("$ " + dailyHigh + " CAD");
-        console.log(dailyHigh);
-		console.log(response.Data);
-        parsedData = parseDataCompare(response.Data);
-        var past = parsedData[0].value;
-		var current = parsedData[30].value;
-        var growthRates = getPercentageChange(past, current)
-        $("#statGrowth").text("% " + math.round(growthRates));
-        calculateMarketCap(symbol1);
-        console.log("data" + parsedData)
-        var volatility = calculateVolatility(parsedData);
-       // console.log(parsedData);
-        drawChart(parsedData);
-       // var volit = calculateVolatility(parsedData);
-       // console.log(volit);
+      dailyHigh = response.Data['30'].high;
+      $("#statHigh").text("$ " + dailyHigh + " CAD");
+      parsedData = parseDataCompare(response.Data);
+      var past = parsedData[0].value;
+		  var current = parsedData[90].value;
+      var growthRates = getPercentageChange(past, current)
+      $("#statGrowth").text(math.round(growthRates) + " %");
+      calculateMarketCap(symbol1);
+      var volatility = calculateVolatility(parsedData);
+      drawChart(parsedData);
 	}).then(function() {
 
 	});
@@ -98,7 +91,6 @@ function drawChart(data) {
         .attr("stroke-width", 1.5)
         .attr("d", line);
 }
-//var parsedData = parseData(a);
 
 
 function makeArticles(type) {
@@ -107,8 +99,6 @@ function makeArticles(type) {
     'from=2018-01-01&' +
     'sortBy=popularity&' +
     'apiKey=c91847ec964243038db42e65ab4c8169';
-      //var req = new Request(queryURL);
-   //var req = new Request(url);
    var limit = 3;
    $.ajax({
     url: queryURL,
@@ -118,7 +108,6 @@ function makeArticles(type) {
    
             for(var i = 0; i <limit; i++){
       var res=results[i];
-      console.log(res);
       var cryptoDiv = $('<div class="article__item">');
       var cryptImage = $('<img class="article__image">');
       cryptImage.attr("src", res.urlToImage);
@@ -149,46 +138,28 @@ function calculateMarketCap(symbol1) {
 		for (var i=0; i<results.length; i++) {
 	        if (results[i].symbol === symbol1) {
 	        	var cap = results[i].quotes.CAD.market_cap;
-            $("#statCap").text(cap);
+            $("#statCap").text("$" + cap);
         	};
     	};
     });
     
 };
 
-
-// function calculateVolatility(data) {
-// 	var arr = []; 
-// 	for (i=0;i<(data.length-1);i++) {
-// 		interdayReturn = (data[i+1].price-data[i].price)/data[i].price;
-// 		arr.push(interdayReturn);
-//     };
-//     console.log(toString(arr));
-//     var stdArr = math.std(arr)*100;
-//     console.log(toString(stdArr));
-//     var annualized = Math.sqrt(365)*stdArr;
-//     console.log(toString(annualized));
-//     return stdArr;
-// };
-
 function calculateVolatility(data) {
     var arr = []; 
 	for (i=0;i<(data.length-1);i++) {
 		interdayReturn = (data[i+1].value-data[i].value)/data[i].value;
         arr.push(interdayReturn);
-        console.log(interdayReturn);
 	};
     var stdArr = math.std(arr)*100;
-    console.log(stdArr);
     var annualized = Math.sqrt(365)*stdArr;
-    console.log(annualized);
-    $("#statVolatility").html("% " + stdArr.toFixed(2));
+    $("#statVolatility").html(stdArr.toFixed(2) + " %");
 };
 
 
+//Date Submit
 $("#date__submit").on("click", function(event) {
   event.preventDefault();   
-
   var userDate = $("#date").val();
   var a = moment(userDate)
   var b = moment().format();
@@ -196,44 +167,31 @@ $("#date__submit").on("click", function(event) {
     $("#error-messaging").text("Please enter a past date");
   } else {
     $("#error-messaging").text("");
-    console.log(b);
     var diff = a.diff(b, 'days');
     var c = Math.abs(diff);
-    console.log(c);
     newGraph("BTC","CAD","QUADRIGACX",c);
   }
-  
-  
-  // function cryptoCompareData(symbol1, symbol2, exchange);
 });
 
 
-
+//Create new graph
 function newGraph(symbol1, symbol2, exchange, range) {
   var limit = "&limit=" + range;
   var queryURL = "https://min-api.cryptocompare.com/data/histoday?" + "fsym=" + symbol1 + "&tsym=" + symbol2 + limit + "&e=" + exchange + "&tryConversion=false"; 
   var parsedData
-  console.log(queryURL);
-  //console.log(queryURL);
   $.ajax({
     url: queryURL,
     method: "GET" 
   }).then(function(response) {
     $("#limitDays").text('');
     $("#limitDays").text("(" + range + " Days)");
-      parsedData = parseDataCompare(response.Data);     
+    parsedData = parseDataCompare(response.Data);     
     var past = parsedData[0].value;
-    var current = parsedData[30].value;
+    var current = parsedData[range].value;
     var growthRates = getPercentageChange(past, current)
     $("#statGrowth").text("% " + math.round(growthRates));
     calculateMarketCap(symbol1);
-    console.log("data" + parsedData)
     var volatility = calculateVolatility(parsedData);
-    
-    console.log(dailyHigh);
-    console.log(response.Data);
-  
-       // console.log(parsedData);
         $(".line-chart").empty(" ");
         drawChart(parsedData);
         calculateVolatility(parsedData);

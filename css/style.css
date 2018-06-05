@@ -233,6 +233,44 @@ a {
     margin-left: 4rem;
 }
 
+/*Sorting Input*/
+
+#sorter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+} 
+
+h3{
+	font-size: 2.5rem;
+}
+
+select {
+  background-color: #1F8CCD;
+  color: white;
+  font-size: 2.5rem;
+  margin: 0px 15px;
+}
+
+#sort__form {
+	display: flex;
+	align-items: center;
+}
+
+#sort-submit {
+	border-radius: 15px;
+	background: #A8C2EA;
+	padding: 10px;
+	border: .2rem solid #6B9AE3;
+	transition: .4s ease all; 
+}
+
+#sort-submit:hover {
+	transform: scale(1.05);
+	background-color: #D5E3F9;
+	cursor: pointer;
+}
+
 /*Media Queries*/
 
 @media screen and (max-width: 748px){
