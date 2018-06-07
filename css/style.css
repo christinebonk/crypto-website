@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Ubuntu:300,400,700');
+@import url('https://fonts.googleapis.com/css?family=Arimo:400,700');
 /*Colors
 Primary: #1F8CCD
 Secondary: #6B9AE3
@@ -9,7 +9,7 @@ Contrast: #FFF
 
 html{
     font-size: 62.5%;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Arimo', sans-serif;
 }
 
 body{
@@ -25,10 +25,11 @@ a {
 
 .header {
     height: 98vh;
-    background-image: url(../assets/images/header-stock.jpg);
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../assets/images/brxxto-352504-unsplash.png);
     background-size: cover;
     background-position: top;
     position: relative;
+    height: 100vh;
 }
 
 .header__logo-box {
@@ -50,8 +51,6 @@ a {
 }
 
 .heading-primary{
-	-webkit-text-stroke: black;
-    -webkit-text-stroke-width: 1.4px;
 }
 
 .heading-primary--main{
@@ -67,6 +66,7 @@ a {
 .btn:link, .btn:visited {
 	text-transform: uppercase;
 	text-decoration: none;
+	margin: 10px 0px;
 	padding: 15px 40px;
 	display: inline-block;
 	border-radius: 100px;
@@ -196,12 +196,12 @@ a {
 	font-size: 1.4rem;
 	width: 270px	;
 	margin-top: 5rem;
-	background-color: #A8C2EA;
+	background-color: #FFF;
     border-radius: 64px;
     padding-top: 2.4rem;
     padding-bottom: 1.2rem;
     color: black;
-	border: .3rem solid #6B9AE3;
+	border: .3rem solid #b30000;
 	margin-left: 2.4rem;
 	margin-right: 2.4rem;
 	transition: .4s ease all; 
