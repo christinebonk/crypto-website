@@ -74,7 +74,21 @@
 <script>
     makeArticles("Ripple Crypto"); 
     cryptoCompareData("XRP","CAD","KRAKEN");
-</script>
+    $("#date__submit").on("click", function(event) {
+    event.preventDefault();   
+    var userDate = $("#date").val();
+    var a = moment(userDate)
+    var b = moment().format();
+    if (userDate > b) {
+        $("#error-messaging").text("Please enter a past date");
+    } else {
+        $("#error-messaging").text("");
+        var diff = a.diff(b, 'days');
+        var c = Math.abs(diff);
+        newGraph("XRP","CAD","KRAKEN",c);
+    }
+});
 
+</script>
 </body>
 </html>
