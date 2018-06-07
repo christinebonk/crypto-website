@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Ubuntu:300,400,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet');
 /*Colors
 Primary: #1F8CCD
 Secondary: #6B9AE3
@@ -9,7 +9,7 @@ Contrast: #FFF
 
 html{
     font-size: 62.5%;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 body{

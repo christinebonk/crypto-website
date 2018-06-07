@@ -80,10 +80,11 @@ h2.stats__heading  {
 
 .article__item{
     width: 30rem;
-    background-color: #A8C2EA;
-    border-radius: 2.5rem;
-    margin-top: 3.2rem;
-    border: .3rem solid #6B9AE3;
+    padding: 10px 0px 10px;
+    background-color: #D5E3F9;
+/*    border-radius: 2.5rem;
+*/    margin-top: 3.2rem;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
 }
 .stat__text{
     font-size: 1.8rem;
