@@ -1,11 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet');
-/*Colors
-Primary: #1F8CCD
-Secondary: #6B9AE3
-Tertiary: #A8C2EA
-Complementry: #302E6D
-Contrast: #FFF
-*/
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet');
 
 html{
     font-size: 62.5%;
@@ -24,8 +17,8 @@ a {
 /*Header */ 
 
 .header {
-    height: 98vh;
-    background-image: url(../assets/images/header-stock.jpg);
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../assets/images/city.png);
     background-size: cover;
     background-position: top;
     position: relative;
@@ -50,14 +43,14 @@ a {
 }
 
 .heading-primary{
-	-webkit-text-stroke: black;
-    -webkit-text-stroke-width: 1.4px;
 }
 
 .heading-primary--main{
 	letter-spacing: 11.2px;
-    font-size: 8rem;
+	text-shadow: 3px 3px 4px rgba(0,0,0,0.5);
+    font-size: 10rem;
 }
+
 .heading-primary--sub{
 	font-size: 2.6rem;
 }
@@ -74,6 +67,7 @@ a {
 	position: relative;
 	font-size: 2.4rem;
 	color: black;
+	margin: 20px 0px;
 }
 
 .btn:hover {
@@ -290,5 +284,9 @@ select {
 
 	.heading-primary{
 		margin-top: 15rem;
+	}
+
+	.heading-primary--main{
+	    font-size: 6rem;
 	}
 }
